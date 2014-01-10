@@ -1,0 +1,17 @@
+{
+  "name": "Ftp monitor",
+  "description": "ftp传输监控",
+ // "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "0.1",
+  "app": {
+    "background": {
+      "scripts": ["jquery-1.10.2.js","sio.js","background.js","main.js"]
+    }
+  },
+  "permissions" :[
+	"http://127.0.0.1:8090/"
+  ],
+  "sandbox":{
+	"pages":["chart.html"]
+  }
+}
