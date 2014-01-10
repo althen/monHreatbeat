@@ -1,5 +1,6 @@
 var webUrl = 'http://127.0.0.1:8090/data';
 
+var dtime = 0;
 
 var webio = null;
 var ctx = null;
@@ -20,6 +21,7 @@ $(document).ready(function(){
 
 	webio.on('heartbeat',function(data){
 		console.log(data);
+		showHeartbeat(data);
 	});
 
 });
@@ -39,6 +41,23 @@ function showBar(num){
 	data.labels.push(num);
 
 	new Chart(ctx).Bar(data);
+}
+
+function showHeartbeat(data){
+	dtime = (new Date()).getTime() - data.timestamp;
+	
+	var datalist = data.heartbeatList;
+	for (var k in datalist){
+		var tr = $('#tab_heartbeat tr[key="' + k + '"]');
+		if (tr.length <= 0){
+			$('#tab_heartbeat').append('<tr key="' + k + '"></tr>');
+			tr = $('#tab_heartbeat tr[key="' + k + '"]');
+		}else{
+			tr.empty();
+		}
+		tr.append('<td>'+ datalist[k].name +'</td><td>'+ datalist[k].lastTime  +'</td><td></td>');
+		//console.log(tr);
+	}
 }
 var data={
 	labels :[0,0,0,0,0,0],

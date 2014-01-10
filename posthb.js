@@ -19,7 +19,7 @@ console.log(ip);
 console.log(port);
 
 var opt ={
-	host : server,
+	host : ip,
 	port : port,
 	path : '/post',
 	method : 'POST'

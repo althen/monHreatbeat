@@ -33,7 +33,15 @@ function heartbeat(k,n,t){
 	hbArr[k].lastTime = new Date();
 	hbArr[k].mt = hbArr[k].lastTime.getTime();
 
-	webio.of('/data').volatile.emit('heartbeat',hbArr);
+	var hbList = {};
+	hbList[k] = hbArr[k];	
+
+	var hbData = {
+		timestamp : (new Date()).getTime(),
+		heartbeatList : hbList
+	};
+
+	webio.of('/data').volatile.emit('heartbeat',hbData);
 }
 
 heartbeat('key0','monServer',5);
