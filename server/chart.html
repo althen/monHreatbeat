@@ -1,0 +1,41 @@
+<html>
+<body>
+<canvas id="chart" width="600" height="360"></canvas>
+<script src="jquery-1.10.2.js"></script>
+<script src="Chart.js"></script>
+<script>
+
+window.addEventListener('message',function(event){
+	//alert(event.data);
+	console.log(event.data);
+	showBar(event.data.total,event.data.datetime);
+});
+var ctx;
+$(function(){
+	ctx = document.getElementById("chart").getContext("2d");
+	showBar(10,'ten');
+});
+
+function showBar(num,dt){
+	data.datasets[0].data.shift();
+	data.datasets[0].data.push(num);
+
+	data.labels.shift();
+	data.labels.push(dt);
+
+	new Chart(ctx).Bar(data);
+}
+var data={
+	labels :[0,0,0,0,0,0,0,0,0,0],
+	datasets:[
+	{
+		fileColor: "rgba(100,120,200,0.6)",
+		data:[20,2,10,2,2,2,0,0,0,0]
+	}
+	]
+}
+
+
+</script>
+</body>
+</html>
